@@ -2,41 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Futuristic Glassmorphism Design System - Premium Portfolio */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Dark theme base colors */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Glass morphism card colors */
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --glass-background: 240 10% 8%;
+    --glass-border: 240 5% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Neon accent colors */
+    --neon-blue: 195 100% 50%;
+    --neon-purple: 262 83% 58%;
+    --neon-pink: 330 81% 60%;
+    
+    --primary: 195 100% 50%;
+    --primary-foreground: 240 10% 3.9%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 240 10% 3.9%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 195 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--neon-purple)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--neon-purple)), hsl(var(--neon-pink)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--neon-pink)));
+    --gradient-glass: linear-gradient(135deg, hsl(var(--glass-background) / 0.1), hsl(var(--glass-background) / 0.05));
+
+    /* Glows and shadows */
+    --glow-primary: 0 0 20px hsl(var(--neon-blue) / 0.3);
+    --glow-secondary: 0 0 20px hsl(var(--neon-purple) / 0.3);
+    --glow-accent: 0 0 20px hsl(var(--neon-pink) / 0.3);
+    --glass-shadow: 0 8px 32px hsl(240 10% 3.9% / 0.3);
+
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +125,137 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-space-grotesk;
+    background: radial-gradient(ellipse at top, hsl(var(--glass-background) / 0.1), transparent 50%),
+                hsl(var(--background));
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Glass morphism card component */
+  .glass-card {
+    @apply relative backdrop-blur-md border border-white/10 bg-gradient-to-br from-white/5 to-white/5 shadow-2xl;
+    background: var(--gradient-glass);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 hsl(var(--glass-border) / 0.5);
+    transition: var(--transition-smooth);
+  }
+
+  .glass-card:hover {
+    @apply border-white/20;
+    transform: translateY(-2px);
+    box-shadow: var(--glass-shadow), var(--glow-primary), inset 0 1px 0 hsl(var(--glass-border) / 0.5);
+  }
+
+  /* Neon glow text */
+  .glow-text {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
+  }
+
+  /* Floating animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-secondary {
+    background: var(--gradient-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Neon button variants */
+  .btn-neon {
+    @apply relative px-8 py-3 rounded-lg font-medium transition-all duration-300;
+    background: var(--gradient-primary);
+    box-shadow: var(--glow-primary);
+  }
+
+  .btn-neon:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow-primary), 0 10px 25px hsl(var(--primary) / 0.2);
+  }
+
+  .btn-neon-outline {
+    @apply relative px-8 py-3 rounded-lg font-medium border-2 bg-transparent transition-all duration-300;
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
+  }
+
+  .btn-neon-outline:hover {
+    background: hsl(var(--primary) / 0.1);
+    box-shadow: var(--glow-primary);
+    transform: translateY(-2px);
+  }
+}
+
+@layer utilities {
+  /* Animation keyframes */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: var(--glow-primary);
+    }
+    50% {
+      box-shadow: var(--glow-primary), var(--glow-secondary);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
   }
 }

@@ -61,7 +61,34 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Neon colors for the futuristic theme
+				'neon-blue': 'hsl(var(--neon-blue))',
+				'neon-purple': 'hsl(var(--neon-purple))',
+				'neon-pink': 'hsl(var(--neon-pink))',
+				'glass-background': 'hsl(var(--glass-background))',
+				'glass-border': 'hsl(var(--glass-border))'
+			},
+			fontFamily: {
+				'space-grotesk': ['Space Grotesk', 'sans-serif'],
+			},
+			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-secondary': 'var(--gradient-secondary)',
+				'gradient-accent': 'var(--gradient-accent)',
+				'gradient-glass': 'var(--gradient-glass)',
+			},
+			boxShadow: {
+				'glow': 'var(--glow-primary)',
+				'glow-secondary': 'var(--glow-secondary)',
+				'glow-accent': 'var(--glow-accent)',
+				'glass': 'var(--glass-shadow)',
+			},
+			animation: {
+				'float': 'float 6s ease-in-out infinite',
+				'fade-in-up': 'fadeInUp 0.8s ease-out',
+				'slide-in-left': 'slideInLeft 0.8s ease-out',
+				'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
